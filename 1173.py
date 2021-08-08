@@ -8,21 +8,40 @@
 
 N, m, M, T, R = map(int, input().split())
 pulse = m
-h = 0
-while True:
-    if pulse - R < 0 or M - m < T or M - m < R:
-        h = -1
+time = 0
+exercise = 0
+while exercise < N:
+    if m + T > M:
         break
     if pulse + T <= M:
         pulse += T
-        N -= 1
-        h += 1
-        if N == 0:
-            break
-    elif pulse + T > M:
-        pulse -= R
-        h += 1
-    else:
-        h = -1
+        exercise += 1
+    elif pulse > M:
         break
-print(h)
+    else:
+        pulse -= R
+        if pulse < m:
+            pulse = m
+    time += 1
+print(time if exercise == N else -1)
+
+# N, m, M, T, R = map(int, input().split())
+# pulse = m
+# h = 0
+# while True:
+#     if pulse - R < 0 or M - m < T or M - m < R:
+#         h = -1
+#         break
+#     if pulse + T <= M:
+#         pulse += T
+#         N -= 1
+#         h += 1
+#         if N == 0:
+#             break
+#     elif pulse + T > M:
+#         pulse -= R
+#         h += 1
+#     else:
+#         h = -1
+#         break
+# print(h)
