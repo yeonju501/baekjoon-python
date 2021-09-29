@@ -1,6 +1,15 @@
 import sys
 sys.stdin = open('1569_input.txt')
 
+def check(min_x, max_x, min_y, max_y):
+    for i in range(T):
+        if (min_x <= xs[i] <= max_x and min_y <= ys[i] <= max_y) and (xs[i] == min_x or xs[i] == max_x or ys[i] == min_y or ys[i] == max_y):
+            continue
+        else:
+            return False
+    return True
+
+
 T = int(input())
 xs = []
 ys = []
@@ -8,26 +17,14 @@ for _ in range(T):
     x, y = map(int, input().split())
     xs.append(x)
     ys.append(y)
-h_max = max(xs)
-h_min = min(xs)
-v_max = max(ys)
-v_min = min(ys)
-side = max(v_max-v_min, h_max-h_min)
-flag = 0
-for i in range(T):
-    if h_min <= xs[i] <= h_min+side and v_min <= ys[i] <= v_min+side:
-        if xs[i] == h_min or xs[i] == h_min+side or ys[i] == v_min or ys[i] == v_min+side:
-            continue
-        else:
-            flag = 1
-    if flag and h_max-side <= xs[i] <= h_max and v_max-side <= ys[i] <= v_max:
-        if xs[i] == h_max or xs[i] == h_max-side or ys[i] != v_max or ys[i] != v_max-side:
-            flag = 0
-            continue
-        else:
-            flag = 1
-if flag:
-    print(-1)
-else:
+max_x = max(xs)
+min_x = min(xs)
+max_y = max(ys)
+min_y = min(ys)
+side = max(max_x-min_x, max_y-min_y)
+c1 = check(min_x, min_x + side, min_y, min_y+side)
+c2 = check(max_x-side, max_x, max_y-side, max_y)
+if c1 or c2:
     print(side)
-
+else:
+    print(-1)
