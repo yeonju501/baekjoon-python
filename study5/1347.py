@@ -8,7 +8,6 @@ N = int(input())
 txt = input()
 d = 0
 i = j = 50
-route = []
 arr[i][j] = '.'
 for s in range(N):
     if txt[s] == 'R':
